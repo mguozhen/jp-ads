@@ -95,13 +95,28 @@
 <!-- ========== 資料請求フォーム ========== -->
 <div class="form-section" id="form">
   <h2>無料で資料請求</h2>
-  <form action="https://www.voc.ai/api/lead" method="POST">
+  <form action="/api/leads" method="POST" id="leadForm">
     <input type="text" name="company" placeholder="会社名" required>
     <input type="text" name="name" placeholder="お名前" required>
     <input type="email" name="email" placeholder="メールアドレス" required>
     <input type="hidden" name="source" value="google-ads-jp-voc-analysis">
+    <input type="hidden" name="product" value="vocai">
+    <input type="hidden" name="gclid" id="gclid" value="">
+    <input type="hidden" name="utm_source" id="utm_source" value="">
+    <input type="hidden" name="utm_medium" id="utm_medium" value="">
+    <input type="hidden" name="utm_campaign" id="utm_campaign" value="">
+    <input type="hidden" name="utm_term" id="utm_term" value="">
     <button type="submit">資料をダウンロード（無料）</button>
   </form>
+  <script>
+  (function(){
+    var params = new URLSearchParams(window.location.search);
+    ['gclid','utm_source','utm_medium','utm_campaign','utm_term'].forEach(function(k){
+      var v = params.get(k);
+      if(v){var el=document.getElementById(k);if(el)el.value=v;}
+    });
+  })();
+  </script>
   <p class="note">30秒で完了 ・ カード登録不要 ・ 営業電話なし</p>
 </div>
 
